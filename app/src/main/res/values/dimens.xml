@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="title">17sp</dimen>
+    <dimen name="rating">15sp</dimen>
+    <dimen name="genre">13sp</dimen>
+    <dimen name="year">12sp</dimen>
+
+</resources>

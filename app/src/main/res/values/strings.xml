@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">Imagination</string>
     <string name="title_artist_detail">Artist Detail</string>
+    <string name="action_settings">Refresh</string>
+    <string name="action_with_third">With third party libraries</string>
+    <string name="action_no_third">Without third party libraries</string>
+    <string name="end_point">http://i.img.co</string>
+    <string name="loading">Loading content&#8230;</string>
+    <string name="success">Data retrieved successfully</string>
+    <string name="error">An error occurred</string>
+    <string name="albums">Albums</string>
 </resources>
