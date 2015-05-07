@@ -69,10 +69,6 @@ public class CustomListAdapter extends BaseAdapter {
         if (convertView == null)
             convertView = inflater.inflate(R.layout.list_row, parent, false);
         ViewHolder holder = new ViewHolder(convertView);
-        /*ImageView thumbNail = (ImageView) convertView
-                .findViewById(R.id.thumbnail);
-        TextView title = (TextView) convertView.findViewById(R.id.name);
-        TextView genre = (TextView) convertView.findViewById(R.id.genre);*/
         // Getting artist data for the row
         Artist a = artistItems.get(position);
         // Thumbnail image
