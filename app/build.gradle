@@ -23,4 +23,11 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.0.0'
     compile 'com.android.support:support-v4:22.0.0'
+    // Use butterKnife to annotate the inflation of views
+    compile 'com.jakewharton:butterknife:6.1.0'
+    // Use retrofit cause it's faster than asyncTask and Volley
+    compile 'com.squareup.retrofit:retrofit:1.6.1'
+    compile 'com.squareup.okhttp:okhttp-urlconnection:2.0.0'
+    // Use ion for image cache
+    compile 'com.koushikdutta.ion:ion:2.1.3'
 }
