@@ -5,7 +5,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,16 +16,29 @@ import com.mariohuete.imagination.models.Album;
 import java.util.HashMap;
 import java.util.List;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
+
 /**
  *
- * Created by Mario Huete Jiménez on 05/05/15.
+ * Created by Mario Huete Jiménez on 08/05/15.
  */
 public class CustomExpandableAdapter extends BaseExpandableListAdapter {
     private Activity activity;
-    private LayoutInflater inflater;
     private String listDataHeader;
     private HashMap<String, List<Album>> albumItems;
-    //ImageLoader imageLoader = AppController.getInstance().getImageLoader();
+
+    static class ViewHolder{
+        @InjectView(R.id.thumbnail)
+        ImageView thumbNail;
+        @InjectView(R.id.name)
+        TextView txtListChild;
+
+        public ViewHolder(View view){
+            ButterKnife.inject(this, view);
+        }
+    }
 
     public CustomExpandableAdapter(Activity activity, String listDataHeader,
                                    HashMap<String, List<Album>> albumItems) {
@@ -73,38 +85,30 @@ public class CustomExpandableAdapter extends BaseExpandableListAdapter {
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded,
                              View convertView, ViewGroup parent) {
-        String headerTitle = (String) getGroup(groupPosition);
         if (convertView == null) {
-            inflater = (LayoutInflater) activity
+            LayoutInflater inflater = (LayoutInflater) activity
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.list_group, null);
+            convertView = inflater.inflate(R.layout.list_group, parent, false);
         }
-        /*ImageView header = (ImageView) convertView
-                .findViewById(R.id.albums);
-        //lblListHeader.setTypeface(null, Typeface.BOLD);
-        header.setText(headerTitle);*/
-
         return convertView;
     }
 
     @Override
     public View getChildView(int groupPosition, int childPosition,
                              boolean isLastChild, View convertView, ViewGroup parent) {
-        //final String childText = (String) getChild(groupPosition, childPosition);
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) activity
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = infalInflater.inflate(R.layout.expandable_row, null);
+            convertView = infalInflater.inflate(R.layout.expandable_row, parent, false);
         }
-        TextView txtListChild = (TextView) convertView.findViewById(R.id.name);
-        txtListChild.setText(albumItems.get(listDataHeader).get(childPosition).getTitle());
-        ImageView thumbNail = (ImageView) convertView.findViewById(R.id.thumbnail);
+        ViewHolder holder = new ViewHolder(convertView);
+        holder.txtListChild.setText(albumItems.get(listDataHeader).get(childPosition).getTitle());
         Ion.with(activity)
                 .load(albumItems.get(listDataHeader).get(childPosition).getPicture())
                 .withBitmap()
                 .placeholder(R.drawable.holder)
                 .error(R.drawable.holder)
-                .intoImageView(thumbNail);
+                .intoImageView(holder.thumbNail);
         return convertView;
     }
 
@@ -112,4 +116,5 @@ public class CustomExpandableAdapter extends BaseExpandableListAdapter {
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return false;
     }
+
 }
