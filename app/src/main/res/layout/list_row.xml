@@ -46,7 +46,7 @@
     <ImageView
         android:layout_width="36dip"
         android:layout_height="36dip"
-        android:src="@drawable/arrow2"
+        android:src="@drawable/arrow"
         android:id="@+id/arrow"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
