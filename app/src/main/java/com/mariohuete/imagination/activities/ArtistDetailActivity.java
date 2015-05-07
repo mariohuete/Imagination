@@ -16,6 +16,7 @@ import com.mariohuete.imagination.utils.Common;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.Optional;
 
 
 /**
@@ -28,7 +29,7 @@ import butterknife.InjectView;
  * more than a {@link ArtistDetailFragment}.
  */
 public class ArtistDetailActivity extends ActionBarActivity {
-    @InjectView(R.id.toolbar) Toolbar toolbar;
+    @Optional @InjectView(R.id.toolbar) Toolbar toolbar;
     @InjectView(R.id.title) TextView title;
 
     @Override
