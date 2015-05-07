@@ -14,6 +14,9 @@ import com.mariohuete.imagination.R;
 import com.mariohuete.imagination.models.Artist;
 import com.mariohuete.imagination.utils.Common;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 
 /**
  * An activity representing a single Artist detail screen. This
@@ -25,18 +28,19 @@ import com.mariohuete.imagination.utils.Common;
  * more than a {@link ArtistDetailFragment}.
  */
 public class ArtistDetailActivity extends ActionBarActivity {
-    private Toolbar toolbar;
-    private TextView title;
+    @InjectView(R.id.toolbar) Toolbar toolbar;
+    @InjectView(R.id.title) TextView title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_artist_detail);
-        // Show the Up button in the action bar.
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        title = (TextView) toolbar.findViewById(R.id.title);
+        // View injection
+        ButterKnife.inject(this);
         setSupportActionBar(toolbar);
+        // Show the Up button in the toolbar.
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        // Set Artist's name in toolbar
         title.setText(((Artist)getIntent().getSerializableExtra(
                 ArtistDetailFragment.ARG_ITEM_ID)).getName());
         // savedInstanceState is non-null when there is fragment state
@@ -76,13 +80,16 @@ public class ArtistDetailActivity extends ActionBarActivity {
             NavUtils.navigateUpTo(this, new Intent(this, ArtistListActivity.class));
             return true;
         }
+        // Refresh content
         if (id == R.id.action_settings) {
             return true;
         }
+        // App works with third party libraries(Retrofit, ButterKnife and Ion)
         if(id == R.id.action_with_third) {
             Common.thirdPartyLibs = true;
             return true;
         }
+        // App works without third party libraries
         if(id == R.id.action_no_third) {
             Common.thirdPartyLibs = false;
             return true;

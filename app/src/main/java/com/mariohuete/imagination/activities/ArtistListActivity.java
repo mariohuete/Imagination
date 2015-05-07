@@ -1,20 +1,20 @@
 package com.mariohuete.imagination.activities;
 
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import com.mariohuete.imagination.fragments.ArtistDetailFragment;
 import com.mariohuete.imagination.fragments.ArtistListFragment;
 import com.mariohuete.imagination.R;
 import com.mariohuete.imagination.models.Artist;
 import com.mariohuete.imagination.utils.Common;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 
 /**
@@ -34,8 +34,7 @@ import com.mariohuete.imagination.utils.Common;
  * to listen for item selections.
  */
 public class ArtistListActivity extends ActionBarActivity implements ArtistListFragment.Callbacks {
-    private Toolbar toolbar;
-    private TextView title;
+    @InjectView(R.id.toolbar) Toolbar toolbar;
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
      * device.
@@ -46,9 +45,10 @@ public class ArtistListActivity extends ActionBarActivity implements ArtistListF
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_artist_list);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        title = (TextView) toolbar.findViewById(R.id.title);
+        // View injection
+        ButterKnife.inject(this);
         setSupportActionBar(toolbar);
+        // Set custom logo in the toolbar.
         getSupportActionBar().setLogo(R.drawable.logo_long);
         if (findViewById(R.id.artist_detail_container) != null) {
             // The detail container view will be present only in the
@@ -62,7 +62,6 @@ public class ArtistListActivity extends ActionBarActivity implements ArtistListF
                     .findFragmentById(R.id.artist_list))
                     .setActivateOnItemClick(true);
         }
-        // TODO: If exposing deep links into your app, handle intents here.
     }
 
     /**
@@ -106,13 +105,16 @@ public class ArtistListActivity extends ActionBarActivity implements ArtistListF
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         // noinspection SimplifiableIfStatement
+        // Refresh content
         if(id == R.id.action_settings) {
             return true;
         }
+        // App works with third party libraries(Retrofit, ButterKnife and Ion)
         if(id == R.id.action_with_third) {
             Common.thirdPartyLibs = true;
             return true;
         }
+        // App works without third party libraries
         if(id == R.id.action_no_third) {
             Common.thirdPartyLibs = false;
             return true;
