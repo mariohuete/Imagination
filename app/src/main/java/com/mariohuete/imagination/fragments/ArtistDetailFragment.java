@@ -2,13 +2,11 @@ package com.mariohuete.imagination.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.koushikdutta.ion.Ion;
@@ -23,7 +21,9 @@ import com.mariohuete.imagination.utils.Common;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 
 /**
@@ -33,7 +33,9 @@ import java.util.Map;
  * on handsets.
  */
 public class ArtistDetailFragment extends Fragment {
-    private List<Album> albums;
+    @InjectView(R.id.cover) ImageView image;
+    @InjectView(R.id.genres) TextView genres;
+    @InjectView(R.id.description) TextView desc;
     /**
      * The fragment argument representing the item ID that this fragment
      * represents.
@@ -67,6 +69,7 @@ public class ArtistDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_artist_detail, container, false);
+        ButterKnife.inject(this, rootView);
         // Show the content.
         if (mItem != null) {
             Ion.with(getActivity())
@@ -74,13 +77,14 @@ public class ArtistDetailFragment extends Fragment {
                     .withBitmap()
                     .placeholder(R.drawable.cover)
                     .error(R.drawable.cover)
-                    .intoImageView((ImageView) rootView.findViewById(R.id.cover));
-            //((TextView) rootView.findViewById(R.id.name)).setText(mItem.getName());
-            ((TextView) rootView.findViewById(R.id.genres)).setText(mItem.getGenres());
-            ((TextView) rootView.findViewById(R.id.description)).setText(mItem.getDescription());
+                    .intoImageView(image);//(ImageView) rootView.findViewById(R.id.cover));
+            genres.setText(mItem.getGenres());//((TextView) rootView.findViewById(R.id.genres)).setText(mItem.getGenres());
+            desc.setText(mItem.getDescription());//(TextView) rootView.findViewById(R.id.description)).setText(mItem.getDescription());
             int i = 0;
             boolean stop = false;
-            albums = new ArrayList<>();
+            List<Album> albums = new ArrayList<>();
+            // Albums are ordered by artist, so 'stop' variable is used to stop the loop when
+            // reach all artist's albums for efficiency.
             while(i < Common.albumList.size()) {
                 if(Common.albumList.get(i).getArtistId() == mItem.getId()) {
                     albums.add(Common.albumList.get(i));
@@ -92,7 +96,6 @@ public class ArtistDetailFragment extends Fragment {
                 }
                 i++;
             }
-            Log.d("SIZE: ", String.valueOf(albums.size()));
             ExpandableListView list = ((ExpandableListView) rootView.findViewById(R.id.album_list));
             HashMap<String, List<Album>> map = new HashMap<>();
             map.put(getString(R.string.albums), albums);

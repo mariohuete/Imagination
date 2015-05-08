@@ -34,8 +34,6 @@ import retrofit.client.Response;
 public class ArtistListFragment extends ListFragment {
     private Context context;
     private ProgressDialog pd;
-    private RestAdapter restAdapter;
-    private RestApi api;
     private CustomListAdapter customAdapter;
     /**
      * The serialization (saved instance state) Bundle key representing the
@@ -161,8 +159,9 @@ public class ArtistListFragment extends ListFragment {
     public void dataRequest(boolean thirdPartyLibs) {
         if(thirdPartyLibs) {
             // Use retrofit to get json data
-            restAdapter = new RestAdapter.Builder().setEndpoint(getString(R.string.end_point)).build();
-            api = restAdapter.create(RestApi.class);
+            RestAdapter restAdapter = new RestAdapter.Builder()
+                    .setEndpoint(getString(R.string.end_point)).build();
+            RestApi api = restAdapter.create(RestApi.class);
             api.getData(new Callback<Data>() {
                 @Override
                 public void success(Data model, Response response) {
