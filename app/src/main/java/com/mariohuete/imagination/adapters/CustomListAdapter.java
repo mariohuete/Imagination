@@ -12,6 +12,8 @@ import android.widget.TextView;
 import com.koushikdutta.ion.Ion;
 import com.mariohuete.imagination.R;
 import com.mariohuete.imagination.models.Artist;
+import com.mariohuete.imagination.utils.Common;
+import com.mariohuete.imagination.utils.ImageLoader;
 
 import java.util.List;
 
@@ -28,9 +30,15 @@ public class CustomListAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private List<Artist> artistItems;
 
-    public CustomListAdapter(Activity activity, List<Artist> movieItems) {
+    public CustomListAdapter(Activity activity, List<Artist> items) {
         this.activity = activity;
-        this.artistItems = movieItems;
+        this.artistItems = items;
+        // If thirdPartyLibs == false, use custom image cache
+        if(!Common.thirdPartyLibs) {
+            // Create ImageLoader object to download and show image in list
+            // Call ImageLoader constructor to initialize FileCache
+            new ImageLoader(activity.getApplicationContext());
+        }
     }
 
     static class ViewHolder{
@@ -72,13 +80,19 @@ public class CustomListAdapter extends BaseAdapter {
         ViewHolder holder = new ViewHolder(convertView);
         // Getting artist data for the row
         Artist a = artistItems.get(position);
-        // Thumbnail image
-        Ion.with(activity)
-                .load(a.getPicture())
-                .withBitmap()
-                .placeholder(R.drawable.holder)
-                .error(R.drawable.holder)
-                .intoImageView(holder.thumbNail);
+        // Thumbnail image: if thirdPartyLibs == true -> load with Ion, else -> custom image cache
+        if(Common.thirdPartyLibs) {
+            Ion.with(activity)
+                    .load(a.getPicture())
+                    .withBitmap()
+                    .placeholder(R.drawable.holder)
+                    .error(R.drawable.holder)
+                    .intoImageView(holder.thumbNail);
+        }
+        else {
+            //DisplayImage function from ImageLoader Class
+            ImageLoader.displayImage(a.getPicture(), holder.thumbNail);
+        }
         // Artist's name
         holder.name.setText(a.getName());
         // Genres

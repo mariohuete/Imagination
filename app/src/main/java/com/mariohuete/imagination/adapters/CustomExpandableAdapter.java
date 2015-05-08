@@ -12,6 +12,8 @@ import android.widget.TextView;
 import com.koushikdutta.ion.Ion;
 import com.mariohuete.imagination.R;
 import com.mariohuete.imagination.models.Album;
+import com.mariohuete.imagination.utils.Common;
+import com.mariohuete.imagination.utils.ImageLoader;
 
 import java.util.HashMap;
 import java.util.List;
@@ -46,6 +48,12 @@ public class CustomExpandableAdapter extends BaseExpandableListAdapter {
         this.activity = activity;
         this.listDataHeader = listDataHeader;
         this.albumItems = albumItems;
+        // If thirdPartyLibs == false, use custom image cache
+        if(!Common.thirdPartyLibs) {
+            // Create ImageLoader object to download and show image in expandable list
+            // Call ImageLoader constructor to initialize FileCache
+            new ImageLoader(activity.getApplicationContext());
+        }
     }
 
     @Override
@@ -104,12 +112,20 @@ public class CustomExpandableAdapter extends BaseExpandableListAdapter {
         }
         ViewHolder holder = new ViewHolder(convertView);
         holder.txtListChild.setText(albumItems.get(listDataHeader).get(childPosition).getTitle());
-        Ion.with(activity)
-                .load(albumItems.get(listDataHeader).get(childPosition).getPicture())
-                .withBitmap()
-                .placeholder(R.drawable.holder)
-                .error(R.drawable.holder)
-                .intoImageView(holder.thumbNail);
+        // Thumbnail image: if thirdPartyLibs == true -> load with Ion, else -> custom image cache
+        if(Common.thirdPartyLibs) {
+            Ion.with(activity)
+                    .load(albumItems.get(listDataHeader).get(childPosition).getPicture())
+                    .withBitmap()
+                    .placeholder(R.drawable.holder)
+                    .error(R.drawable.holder)
+                    .intoImageView(holder.thumbNail);
+        }
+        else {
+            //DisplayImage function from ImageLoader Class
+            ImageLoader.displayImage(albumItems.get(listDataHeader).get(childPosition).getPicture(),
+                    holder.thumbNail);
+        }
         return convertView;
     }
 
