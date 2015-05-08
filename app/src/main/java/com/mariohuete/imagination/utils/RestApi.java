@@ -11,6 +11,6 @@ import retrofit.http.GET;
  * Created by Mario Huete Jiménez on 08/05/15.
  */
 public interface RestApi {
-    @GET("/data/data.json")
+    @GET("/data.json")
     void getData(Callback<Data> response);
 }
