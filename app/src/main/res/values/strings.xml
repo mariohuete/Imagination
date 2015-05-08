@@ -8,6 +8,17 @@
     <string name="loading">Loading content&#8230;</string>
     <string name="success">Data retrieved successfully</string>
     <string name="error">An error occurred</string>
-    <string name="albums">Albums</string>
+    <string name="artists">artists</string>
+    <string name="albums">albums</string>
     <string name="external">ImageCache</string>
+    <!-- Artist -->
+    <string name="id">id</string>
+    <string name="genres">genres</string>
+    <string name="picture">picture</string>
+    <string name="name">name</string>
+    <string name="description">description</string>
+    <!-- Album -->
+    <string name="artistId">artistId</string>
+    <string name="title">title</string>
+    <string name="type">type</string>
 </resources>
