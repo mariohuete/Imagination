@@ -36,6 +36,7 @@ public class CustomExpandableAdapter extends BaseExpandableListAdapter {
         TextView txtListChild;
 
         public ViewHolder(View view){
+            // View injection in parent view
             ButterKnife.inject(this, view);
         }
     }

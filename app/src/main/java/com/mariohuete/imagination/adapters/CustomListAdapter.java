@@ -42,6 +42,7 @@ public class CustomListAdapter extends BaseAdapter {
         TextView genre;
 
         public ViewHolder(View view){
+            // View injection in parent view
             ButterKnife.inject(this, view);
         }
     }
