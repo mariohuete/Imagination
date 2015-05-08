@@ -2,6 +2,8 @@ package com.mariohuete.imagination.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,9 +79,10 @@ public class ArtistDetailFragment extends Fragment {
                     .withBitmap()
                     .placeholder(R.drawable.cover)
                     .error(R.drawable.cover)
-                    .intoImageView(image);//(ImageView) rootView.findViewById(R.id.cover));
-            genres.setText(mItem.getGenres());//((TextView) rootView.findViewById(R.id.genres)).setText(mItem.getGenres());
-            desc.setText(mItem.getDescription());//(TextView) rootView.findViewById(R.id.description)).setText(mItem.getDescription());
+                    .intoImageView(image);
+            genres.setText(mItem.getGenres());
+            desc.setText(Html.fromHtml(mItem.getDescription()));
+            desc.setMovementMethod(LinkMovementMethod.getInstance());
             int i = 0;
             boolean stop = false;
             List<Album> albums = new ArrayList<>();

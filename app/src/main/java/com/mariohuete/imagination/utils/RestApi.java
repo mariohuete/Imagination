@@ -8,7 +8,7 @@ import retrofit.http.GET;
 
 /**
  *
- * Created by Mario Huete Jiménez on 03/05/15.
+ * Created by Mario Huete Jiménez on 08/05/15.
  */
 public interface RestApi {
     @GET("/data/data.json")

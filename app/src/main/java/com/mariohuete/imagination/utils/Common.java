@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  *
- * Created by Mario Huete Jiménez on 04/05/15.
+ * Created by Mario Huete Jiménez on 08/05/15.
  */
 public class Common {
     public static List<Artist> artistList = new ArrayList<>();
