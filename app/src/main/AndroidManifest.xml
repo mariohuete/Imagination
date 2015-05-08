@@ -5,6 +5,8 @@
     <!-- Permission to network access -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- Permission to image cache -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <!-- Responsive design with layout-small, layout-large and the usual drawable folders -->
     <supports-screens
