@@ -9,4 +9,5 @@
     <string name="success">Data retrieved successfully</string>
     <string name="error">An error occurred</string>
     <string name="albums">Albums</string>
+    <string name="external">ImageCache</string>
 </resources>
