@@ -1,7 +1,9 @@
 package com.mariohuete.imagination.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -100,6 +102,10 @@ public class ArtistListActivity extends ActionBarActivity implements ArtistListF
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        // Retrieve preferences
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        // Store preferences
+        SharedPreferences.Editor editor = preferences.edit();
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
@@ -112,11 +118,15 @@ public class ArtistListActivity extends ActionBarActivity implements ArtistListF
         // App works with third party libraries(Retrofit, ButterKnife and Ion)
         if(id == R.id.action_with_third) {
             Common.thirdPartyLibs = true;
+            editor.putBoolean(getString(R.string.third), Common.thirdPartyLibs);
+            editor.commit();
             return true;
         }
         // App works without third party libraries
         if(id == R.id.action_no_third) {
             Common.thirdPartyLibs = false;
+            editor.putBoolean(getString(R.string.third), Common.thirdPartyLibs);
+            editor.commit();
             return true;
         }
         return super.onOptionsItemSelected(item);
