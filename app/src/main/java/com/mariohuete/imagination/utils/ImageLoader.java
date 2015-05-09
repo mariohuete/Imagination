@@ -233,7 +233,8 @@ public class ImageLoader {
     public static void clearCache() {
         // Clear cache directory downloaded images and stored data in maps
         memoryCache.clear();
-        fileCache.clear();
+        if(fileCache != null)
+            fileCache.clear();
     }
 
 }
