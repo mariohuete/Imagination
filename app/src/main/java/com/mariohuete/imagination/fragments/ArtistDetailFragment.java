@@ -19,6 +19,7 @@ import com.mariohuete.imagination.adapters.CustomExpandableAdapter;
 import com.mariohuete.imagination.models.Album;
 import com.mariohuete.imagination.models.Artist;
 import com.mariohuete.imagination.utils.Common;
+import com.mariohuete.imagination.utils.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -74,12 +75,18 @@ public class ArtistDetailFragment extends Fragment {
         ButterKnife.inject(this, rootView);
         // Show the content.
         if (mItem != null) {
-            Ion.with(getActivity())
-                    .load(mItem.getPicture())
-                    .withBitmap()
-                    .placeholder(R.drawable.cover)
-                    .error(R.drawable.cover)
-                    .intoImageView(image);
+            if(Common.thirdPartyLibs) {
+                Ion.with(getActivity())
+                        .load(mItem.getPicture())
+                        .withBitmap()
+                        .placeholder(R.drawable.cover)
+                        .error(R.drawable.cover)
+                        .intoImageView(image);
+            }
+            else {
+                //DisplayImage function from ImageLoader Class
+                ImageLoader.displayImage(mItem.getPicture(), image);
+            }
             genres.setText(mItem.getGenres());
             desc.setText(Html.fromHtml(mItem.getDescription()));
             desc.setMovementMethod(LinkMovementMethod.getInstance());
@@ -108,4 +115,5 @@ public class ArtistDetailFragment extends Fragment {
         }
         return rootView;
     }
+
 }
