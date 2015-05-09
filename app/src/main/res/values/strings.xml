@@ -11,6 +11,8 @@
     <string name="artists">artists</string>
     <string name="albums">albums</string>
     <string name="external">ImageCache</string>
+    <string name="show_splash">show</string>
+    <string name="third">third</string>
     <!-- Artist -->
     <string name="id">id</string>
     <string name="genres">genres</string>
