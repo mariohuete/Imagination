@@ -5,7 +5,8 @@
     <string name="action_with_third">With third party libraries</string>
     <string name="action_no_third">Without third party libraries</string>
     <string name="end_point">http://i.img.co/data</string>
-    <string name="loading">Loading content&#8230;</string>
+    <string name="loading">Loading content (RetroFit)&#8230;</string>
+    <string name="loading_async">Loading content (AsyncTask)&#8230;</string>
     <string name="success">Data retrieved successfully</string>
     <string name="error">An error occurred</string>
     <string name="artists">artists</string>
