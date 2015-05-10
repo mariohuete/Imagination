@@ -39,7 +39,7 @@ public class ImageLoader {
     // Handler to display images in UI thread
     private static Handler handler = new Handler();
     // Default image show in list
-    private final static int stub_id = R.drawable.holder;
+    private static int stub_id = R.drawable.holder;
 
 
     public ImageLoader(Context context) {
@@ -47,10 +47,9 @@ public class ImageLoader {
         // Creates a thread pool that reuses a fixed number of
         // threads operating off a shared unbounded queue.
         executorService = Executors.newFixedThreadPool(5);
-
     }
 
-    public static void displayImage(String url, ImageView imageView) {
+    public static void displayImage(String url, ImageView imageView, int img) {
         // Store image and url in Map
         imageViews.put(imageView, url);
         // Check image is stored in MemoryCache Map or not
@@ -64,6 +63,10 @@ public class ImageLoader {
             // Queue Photo to download from url
             queuePhoto(url, imageView);
             // Before downloading image show default image
+            if(img == 1)
+                stub_id = R.drawable.cover_bg;
+            else
+                stub_id = R.drawable.holder;
             imageView.setImageResource(stub_id);
         }
     }

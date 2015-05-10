@@ -91,7 +91,7 @@ public class CustomListAdapter extends BaseAdapter {
         }
         else {
             //DisplayImage function from ImageLoader Class
-            ImageLoader.displayImage(a.getPicture(), holder.thumbNail);
+            ImageLoader.displayImage(a.getPicture(), holder.thumbNail, 0);
         }
         // Artist's name
         holder.name.setText(a.getName());

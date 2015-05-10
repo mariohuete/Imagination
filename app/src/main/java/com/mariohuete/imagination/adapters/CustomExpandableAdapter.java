@@ -124,7 +124,7 @@ public class CustomExpandableAdapter extends BaseExpandableListAdapter {
         else {
             //DisplayImage function from ImageLoader Class
             ImageLoader.displayImage(albumItems.get(listDataHeader).get(childPosition).getPicture(),
-                    holder.thumbNail);
+                    holder.thumbNail, 0);
         }
         return convertView;
     }
