@@ -9,6 +9,8 @@
     <string name="loading_async">Loading content (AsyncTask)&#8230;</string>
     <string name="success">Data retrieved successfully</string>
     <string name="error">An error occurred</string>
+    <string name="connection">WiFi/3G/4G connection is required, please try again</string>
+    <string name="retrofit_error">Unable to resolve host</string>
     <string name="artists">artists</string>
     <string name="albums">albums</string>
     <string name="external">ImageCache</string>
