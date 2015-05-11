@@ -178,6 +178,9 @@ public class ArtistListFragment extends ListFragment {
                     customAdapter = new CustomListAdapter(getActivity(),
                             Common.artistList);
                     setListAdapter(customAdapter);
+                    // Show by default de first item if app is in two pane model
+                    if(Common.twoPane)
+                        getListView().performItemClick(getListView().getChildAt(0), 0, 0);
                     if (pd.isShowing())
                         pd.dismiss();
                     Toast.makeText(context, getString(R.string.success), Toast.LENGTH_LONG).show();
