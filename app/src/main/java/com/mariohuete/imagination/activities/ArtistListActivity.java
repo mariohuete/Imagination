@@ -17,6 +17,7 @@ import com.mariohuete.imagination.utils.Common;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.Optional;
 
 
 /**
@@ -36,7 +37,7 @@ import butterknife.InjectView;
  * to listen for item selections.
  */
 public class ArtistListActivity extends ActionBarActivity implements ArtistListFragment.Callbacks {
-    @InjectView(R.id.toolbar) Toolbar toolbar;
+    @Optional @InjectView(R.id.toolbar) Toolbar toolbar;
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
      * device.
@@ -47,22 +48,25 @@ public class ArtistListActivity extends ActionBarActivity implements ArtistListF
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_artist_list);
-        // View injection
-        ButterKnife.inject(this);
-        setSupportActionBar(toolbar);
-        // Set custom logo in the toolbar.
-        getSupportActionBar().setLogo(R.drawable.logo_long);
         if (findViewById(R.id.artist_detail_container) != null) {
             // The detail container view will be present only in the
             // large-screen layouts (res/values-large and
             // res/values-sw600dp). If this view is present, then the
             // activity should be in two-pane mode.
             mTwoPane = true;
+            Common.twoPane = true;
             // In two-pane mode, list items should be given the
             // 'activated' state when touched.
             ((ArtistListFragment) getSupportFragmentManager()
                     .findFragmentById(R.id.artist_list))
                     .setActivateOnItemClick(true);
+        }
+        else {
+            // View injection
+            ButterKnife.inject(this);
+            setSupportActionBar(toolbar);
+            // Set custom logo in the toolbar.
+            getSupportActionBar().setLogo(R.drawable.logo_long);
         }
     }
 
@@ -109,26 +113,36 @@ public class ArtistListActivity extends ActionBarActivity implements ArtistListF
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        // noinspection SimplifiableIfStatement
-        // Refresh content
-        if(id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
+                return true;
+            case R.id.action_with_third:
+                Common.thirdPartyLibs = true;
+                editor.putBoolean(getString(R.string.third), Common.thirdPartyLibs);
+                editor.apply();
+                return true;
+            case R.id.action_no_third:
+                Common.thirdPartyLibs = false;
+                editor.putBoolean(getString(R.string.third), Common.thirdPartyLibs);
+                editor.apply();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        // App works with third party libraries(Retrofit, ButterKnife and Ion)
-        if(id == R.id.action_with_third) {
-            Common.thirdPartyLibs = true;
-            editor.putBoolean(getString(R.string.third), Common.thirdPartyLibs);
-            editor.commit();
-            return true;
-        }
-        // App works without third party libraries
-        if(id == R.id.action_no_third) {
-            Common.thirdPartyLibs = false;
-            editor.putBoolean(getString(R.string.third), Common.thirdPartyLibs);
-            editor.commit();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onBackPressed() {
+        // Close completely the app if the background is interrupt by clicking back button
+        System.exit(0);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
 }

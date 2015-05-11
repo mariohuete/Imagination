@@ -75,37 +75,33 @@ public class ArtistDetailActivity extends ActionBarActivity {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         // Store preferences
         SharedPreferences.Editor editor = preferences.edit();
-        int id = item.getItemId();
-        if (id == android.R.id.home) {
-            // This ID represents the Home or Up button. In the case of this
-            // activity, the Up button is shown. Use NavUtils to allow users
-            // to navigate up one level in the application structure. For
-            // more details, see the Navigation pattern on Android Design:
-            //
-            // http://developer.android.com/design/patterns/navigation.html#up-vs-back
-            //
-            NavUtils.navigateUpTo(this, new Intent(this, ArtistListActivity.class));
-            return true;
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // This ID represents the Home or Up button. In the case of this
+                // activity, the Up button is shown. Use NavUtils to allow users
+                // to navigate up one level in the application structure. For
+                // more details, see the Navigation pattern on Android Design:
+                //
+                // http://developer.android.com/design/patterns/navigation.html#up-vs-back
+                //
+                NavUtils.navigateUpTo(this, new Intent(this, ArtistListActivity.class));
+                return true;
+            case R.id.action_settings:
+                NavUtils.navigateUpTo(this, new Intent(this, ArtistListActivity.class));
+                return true;
+            case R.id.action_with_third:
+                Common.thirdPartyLibs = true;
+                editor.putBoolean(getString(R.string.third), Common.thirdPartyLibs);
+                editor.apply();
+                return true;
+            case R.id.action_no_third:
+                Common.thirdPartyLibs = false;
+                editor.putBoolean(getString(R.string.third), Common.thirdPartyLibs);
+                editor.apply();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        // Refresh content
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        // App works with third party libraries(Retrofit, ButterKnife and Ion)
-        if(id == R.id.action_with_third) {
-            Common.thirdPartyLibs = true;
-            editor.putBoolean(getString(R.string.third), Common.thirdPartyLibs);
-            editor.commit();
-            return true;
-        }
-        // App works without third party libraries
-        if(id == R.id.action_no_third) {
-            Common.thirdPartyLibs = false;
-            editor.putBoolean(getString(R.string.third), Common.thirdPartyLibs);
-            editor.commit();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
