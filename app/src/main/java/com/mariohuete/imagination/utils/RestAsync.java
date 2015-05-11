@@ -146,7 +146,7 @@ public class RestAsync extends AsyncTask<Void, Void, Boolean> {
                     Common.albumList.add(new Album(obj.getDouble(context.getString(R.string.id)),
                             obj.getDouble(context.getString(R.string.artistId)),
                             obj.getString(context.getString(R.string.title)),
-                            obj.getString(context.getString(R.string.type)),
+                            //obj.getString(context.getString(R.string.type)),
                             obj.getString(context.getString(R.string.picture))));
                 } catch (JSONException e) {
                     e.printStackTrace();
