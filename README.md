@@ -26,7 +26,6 @@
 </br>
 <h2>Screenshots</h2>
 <h3>Mobile portrait</h3>
-<table>
 <tr>
   <td>![Splash screen](https://raw.githubusercontent.com/mariohuete/Imagination/master/screenshots/splash_m.png)</td>
   <td>![Artist list (mobile)](https://raw.githubusercontent.com/mariohuete/Imagination/master/screenshots/artist_list_m.png)</td>
@@ -37,15 +36,12 @@
   <td>![Artist detail (mobile)](https://raw.githubusercontent.com/mariohuete/Imagination/master/screenshots/artist_detail_link_m.png)</td>
   <td>![Artist albums (mobile)](https://raw.githubusercontent.com/mariohuete/Imagination/master/screenshots/albums_m.png)</td>
 </tr>
-</table>
 <h3>Mobile landscape</h3>
-<table>
 <tr>
   <td>![Artist list (landscape mobile)](https://raw.githubusercontent.com/mariohuete/Imagination/master/screenshots/artist_list_land_m.png)</td>
   <td>![Artist detail (landscape mobile)](https://raw.githubusercontent.com/mariohuete/Imagination/master/screenshots/artist_detail_l.png)</td>
   <td>![Artist albums (landscape mobile)](https://raw.githubusercontent.com/mariohuete/Imagination/master/screenshots/albums_l.png)</td>
 </tr>
-</table>
 <!--![Splash screen](https://raw.githubusercontent.com/mariohuete/Imagination/master/screenshots/splash_m.png)
 ![Artist list (mobile)](https://raw.githubusercontent.com/mariohuete/Imagination/master/screenshots/artist_list_m.png)
 ![Menu (mobile)](https://raw.githubusercontent.com/mariohuete/Imagination/master/screenshots/menu_m.png)
