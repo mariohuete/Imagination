@@ -32,17 +32,17 @@ public class Artist implements Serializable{
         return this.id;
     }
 
-    public void setGenres(String genres) {
+    /*public void setGenres(String genres) {
         this.genres = genres;
-    }
+    }*/
 
     public String getGenres() {
         return this.genres;
     }
 
-    public void setPicture(String picture) {
+    /*public void setPicture(String picture) {
         this.picture = picture;
-    }
+    }*/
 
     public String getPicture() {
         return this.picture;
@@ -56,9 +56,9 @@ public class Artist implements Serializable{
         return this.name;
     }
 
-    public void setDescription(String description) {
+    /*public void setDescription(String description) {
         this.description = description;
-    }
+    }*/
 
     public String getDescription() {
         return this.description;

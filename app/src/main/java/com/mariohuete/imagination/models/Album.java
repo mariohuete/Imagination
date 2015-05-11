@@ -10,15 +10,15 @@ public class Album {
     private double id;
     private double artistId;
     private String title;
-    private String type;
+    //private String type;
     private String picture;
 
     //METHODS---------------------------------------------------------------------------------------
-    public Album(double id, double artistId, String title, String type, String picture) {
+    public Album(double id, double artistId, String title, /*String type,*/ String picture) {
         this.id = id;
         this.artistId = artistId;
         this.title = title;
-        this.type = type;
+        //this.type = type;
         this.picture = picture;
     }
 
@@ -30,9 +30,9 @@ public class Album {
         return this.id;
     }
 
-    public void setArtistId(double artistId) {
+    /*public void setArtistId(double artistId) {
         this.artistId = artistId;
-    }
+    }*/
 
     public double getArtistId() {
         return this.artistId;
@@ -46,7 +46,7 @@ public class Album {
         return this.title;
     }
 
-    public void setType(String type) {
+    /*public void setType(String type) {
         this.type = type;
     }
 
@@ -56,7 +56,7 @@ public class Album {
 
     public void setPicture(String picture) {
         this.picture = picture;
-    }
+    }*/
 
     public String getPicture() {
         return this.picture;

@@ -18,17 +18,17 @@ public class Data {
         this.albums = albums;
     }
 
-    public void setArtists(List<Artist> artists) {
+    /*public void setArtists(List<Artist> artists) {
         this.artists = artists;
-    }
+    }*/
 
     public List<Artist> getArtists() {
         return this.artists;
     }
 
-    public void setAlbums(List<Album> albums) {
+    /*public void setAlbums(List<Album> albums) {
         this.albums = albums;
-    }
+    }*/
 
     public List<Album> getAlbums() {
         return this.albums;
