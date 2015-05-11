@@ -68,6 +68,9 @@ public class RestAsync extends AsyncTask<Void, Void, Boolean> {
     protected void onPostExecute(Boolean result) {
         adapter = new CustomListAdapter(fragment.getActivity(), Common.artistList);
         fragment.setListAdapter(adapter);
+        // Show by default de first item if app is in two pane model
+        if(Common.twoPane)
+            fragment.getListView().performItemClick(fragment.getListView().getChildAt(0), 0, 0);
         if (pd.isShowing())
             pd.dismiss();
     }
