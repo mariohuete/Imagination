@@ -37,8 +37,8 @@
         </activity>
         <activity
             android:name=".activities.ArtistDetailActivity"
-            android:label="@string/title_artist_detail"
-            android:parentActivityName=".activities.ArtistListActivity" >
+            android:label="@string/title_artist_detail" >
+            <!--android:parentActivityName=".activities.ArtistListActivity"-->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.ArtistListActivity" />
