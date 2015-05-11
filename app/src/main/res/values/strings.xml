@@ -16,6 +16,14 @@
     <string name="external">ImageCache</string>
     <string name="show_splash">show</string>
     <string name="third">third</string>
+    <string name="logo_desc">Imagination logo for splash screen</string>
+    <string name="album_desc">Album image</string>
+    <string name="album_icon_desc">Album icon</string>
+    <string name="artist_desc">Artist image</string>
+    <string name="genres_desc">Genres icon</string>
+    <string name="description_desc">Description icon</string>
+    <string name="info_desc">Info toolbar icon</string>
+    <string name="arrow_desc">Arrow icon</string>
     <!-- Artist -->
     <string name="id">id</string>
     <string name="genres">genres</string>
