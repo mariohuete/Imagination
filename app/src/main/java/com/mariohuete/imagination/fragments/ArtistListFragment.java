@@ -163,7 +163,7 @@ public class ArtistListFragment extends ListFragment {
     }
 
     public void dataRequest(boolean thirdPartyLibs) {
-        if(thirdPartyLibs) {
+        if(thirdPartyLibs){ //&& (android.os.Build.VERSION.SDK_INT >= 10)) {
             // If use Retrofit clear directory and files
             ImageLoader.clearCache();
             // Use retrofit to get json data
@@ -187,7 +187,13 @@ public class ArtistListFragment extends ListFragment {
                 public void failure(RetrofitError error) {
                     if (pd.isShowing())
                         pd.dismiss();
-                    Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
+                    if (error.toString().contains(getString(R.string.retrofit_error))) {
+                        getActivity().finish();
+                        Toast.makeText(context, getString(R.string.connection),
+                                Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
+                    }
                 }
             });
         }
@@ -199,7 +205,7 @@ public class ArtistListFragment extends ListFragment {
         // Store preferences when data is retrieved to not show splash screen again
         SharedPreferences.Editor editor = preferences.edit();
         editor.putBoolean(getString(R.string.show_splash), false);
-        editor.commit();
+        editor.apply();
     }
 
 }

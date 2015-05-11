@@ -1,10 +1,17 @@
 package com.mariohuete.imagination.fragments;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NavUtils;
+import android.support.v7.internal.view.menu.MenuBuilder;
+import android.support.v7.widget.PopupMenu;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
@@ -27,6 +34,7 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.Optional;
 
 
 /**
@@ -35,10 +43,13 @@ import butterknife.InjectView;
  * in two-pane mode (on tablets) or a {@link ArtistDetailActivity}
  * on handsets.
  */
-public class ArtistDetailFragment extends Fragment {
+public class ArtistDetailFragment extends Fragment implements View.OnClickListener {
     @InjectView(R.id.cover) ImageView image;
     @InjectView(R.id.genres) TextView genres;
     @InjectView(R.id.description) TextView desc;
+    @Optional @InjectView(R.id.title) TextView title;
+    @Optional @InjectView(R.id.info) ImageView info;
+
     /**
      * The fragment argument representing the item ID that this fragment
      * represents.
@@ -73,6 +84,11 @@ public class ArtistDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_artist_detail, container, false);
         ButterKnife.inject(this, rootView);
+        if(Common.twoPane) {
+            // Set Artist's name in toolbar
+            title.setText(mItem.getName());
+            info.setOnClickListener(this);
+        }
         // Show the content.
         if (mItem != null) {
             if(Common.thirdPartyLibs) {
@@ -85,7 +101,7 @@ public class ArtistDetailFragment extends Fragment {
             }
             else {
                 //DisplayImage function from ImageLoader Class
-                ImageLoader.displayImage(mItem.getPicture(), image);
+                ImageLoader.displayImage(mItem.getPicture(), image, 1);
             }
             genres.setText(mItem.getGenres());
             desc.setText(Html.fromHtml(mItem.getDescription()));
@@ -114,6 +130,41 @@ public class ArtistDetailFragment extends Fragment {
             list.setAdapter(customAdapter);
         }
         return rootView;
+    }
+
+    @Override
+    public void onClick(View view) {
+        // This is an android.support.v7.widget.PopupMenu;
+        PopupMenu popupMenu = new PopupMenu(getActivity(), view) {
+            @Override
+            public boolean onMenuItemSelected(MenuBuilder menu, MenuItem item) {
+                // Retrieve preferences
+                SharedPreferences preferences = PreferenceManager.
+                        getDefaultSharedPreferences(getActivity());
+                // Store preferences
+                SharedPreferences.Editor editor = preferences.edit();
+                switch (item.getItemId()) {
+                    case R.id.action_settings:
+                        NavUtils.navigateUpTo(getActivity(), new Intent(getActivity(),
+                                ArtistListActivity.class));
+                        return true;
+                    case R.id.action_with_third:
+                        Common.thirdPartyLibs = true;
+                        editor.putBoolean(getString(R.string.third), Common.thirdPartyLibs);
+                        editor.apply();
+                        return true;
+                    case R.id.action_no_third:
+                        Common.thirdPartyLibs = false;
+                        editor.putBoolean(getString(R.string.third), Common.thirdPartyLibs);
+                        editor.apply();
+                        return true;
+                    default:
+                        return super.onMenuItemSelected(menu, item);
+                }
+            }
+        };
+        popupMenu.inflate(R.menu.menu_main);
+        popupMenu.show();
     }
 
 }
