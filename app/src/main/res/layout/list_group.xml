@@ -10,9 +10,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/album"
+        android:contentDescription="@string/album_icon_desc"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:paddingRight="15dip"
-        android:paddingEnd="15dip" />
+        android:paddingLeft="@dimen/inset"
+        android:paddingStart="@dimen/inset"
+        android:paddingRight="@dimen/padding_side_large"
+        android:paddingEnd="@dimen/padding_side_large" />
 
 </RelativeLayout>

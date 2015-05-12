@@ -19,23 +19,24 @@
         android:layout_height="match_parent"
         android:layout_weight="0.5"
         android:layout_gravity="center_horizontal"
-        android:layout_marginRight="16dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/cover_bg"/>
+        android:layout_marginRight="@dimen/padding_side_fragment"
+        android:layout_marginEnd="@dimen/padding_side_fragment"
+        android:background="@drawable/cover_bg"
+        android:contentDescription="@string/artist_desc"/>
 
     <ScrollView
         android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="0.5"
-        android:layout_marginRight="16dp"
-        android:layout_marginEnd="16dp" >
+        android:layout_marginRight="@dimen/padding_side_fragment"
+        android:layout_marginEnd="@dimen/padding_side_fragment" >
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="16dp"
-            android:layout_marginEnd="16dp" >
+            android:layout_marginRight="@dimen/padding_side_fragment"
+            android:layout_marginEnd="@dimen/padding_side_fragment" >
 
             <RelativeLayout
                 android:id="@+id/genrel"
@@ -46,8 +47,11 @@
                     android:id="@+id/gen"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="10dip"
-                    android:paddingStart="10dip"
+                    android:paddingLeft="@dimen/padding_side"
+                    android:paddingStart="@dimen/padding_side"
+                    android:paddingRight="@dimen/padding_side"
+                    android:paddingEnd="@dimen/padding_side"
+                    android:contentDescription="@string/genres_desc"
                     android:src="@drawable/art" />
 
                 <TextView
@@ -55,11 +59,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:paddingRight="10dip"
-                    android:paddingEnd="10dip"
+                    android:paddingLeft="@dimen/inset"
+                    android:paddingRight="@dimen/padding_side"
+                    android:paddingEnd="@dimen/padding_side"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/gen"
-                    android:layout_toEndOf="@+id/gen"/>
+                    android:layout_toEndOf="@+id/gen"
+                    tools:ignore="RtlHardcoded" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -67,14 +73,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/genrel"
-                android:layout_marginBottom="15dip">
+                android:layout_marginBottom="@dimen/padding_side_large">
 
                 <ImageView
                     android:id="@+id/desc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="10dip"
-                    android:paddingStart="10dip"
+                    android:paddingLeft="@dimen/padding_side"
+                    android:paddingStart="@dimen/padding_side"
+                    android:paddingRight="@dimen/inset"
+                    android:paddingEnd="@dimen/inset"
+                    android:contentDescription="@string/description_desc"
                     android:src="@drawable/desc" />
 
                 <TextView
@@ -82,11 +91,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:paddingRight="15dip"
-                    android:paddingEnd="15dip"
+                    android:paddingLeft="@dimen/inset"
+                    android:paddingRight="@dimen/padding_side_large"
+                    android:paddingEnd="@dimen/padding_side_large"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/desc"
-                    android:layout_toEndOf="@+id/desc"/>
+                    android:layout_toEndOf="@+id/desc"
+                    tools:ignore="RtlHardcoded" />
             </RelativeLayout>
 
         </RelativeLayout>
@@ -97,7 +108,7 @@
         android:id="@+id/album_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="16dp"
-        android:layout_marginEnd="16dp" />
+        android:layout_marginRight="@dimen/padding_side_fragment"
+        android:layout_marginEnd="@dimen/padding_side_fragment" />
 
 </LinearLayout>

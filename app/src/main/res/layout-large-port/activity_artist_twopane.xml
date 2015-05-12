@@ -21,14 +21,14 @@
 
     <fragment android:id="@+id/artist_list"
         android:name="com.mariohuete.imagination.fragments.ArtistListFragment"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/inset"
         android:layout_height="match_parent"
         android:layout_weight="2"
         tools:layout="@android:layout/list_content" >
     </fragment>
 
     <FrameLayout android:id="@+id/artist_detail_container"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/inset"
         android:layout_height="match_parent"
         android:layout_weight="3" >
     </FrameLayout>

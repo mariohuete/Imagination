@@ -2,12 +2,13 @@
 <android.support.v7.widget.Toolbar
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/imagination"
-    app:contentInsetEnd="0dp"
-    app:contentInsetStart="0dp"
+    app:contentInsetEnd="@dimen/inset"
+    app:contentInsetStart="@dimen/inset"
     app:theme="@style/AppTheme">
 
     <RelativeLayout
@@ -22,7 +23,8 @@
             android:layout_centerHorizontal="true"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textStyle="bold"
-            android:textColor="@color/list_row_start_color" />
+            android:textColor="@color/list_row_start_color"
+            tools:ignore="RelativeOverlap" />
 
         <ImageButton
             android:id="@+id/info"
@@ -31,8 +33,9 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="20dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginRight="@dimen/three_dots"
+            android:layout_marginEnd="@dimen/three_dots"
+            android:contentDescription="@string/info_desc"
             android:background="@drawable/ic_more_white"/>
 
     </RelativeLayout>
