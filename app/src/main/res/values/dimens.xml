@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="title">17sp</dimen>
-    <dimen name="rating">15sp</dimen>
-    <dimen name="genre">13sp</dimen>
-    <dimen name="year">12sp</dimen>
+    <dimen name="image_large">120dp</dimen>
+    <dimen name="image">90dp</dimen>
+    <dimen name="image_album">75dp</dimen>
+    <dimen name="icon_size_large">48dp</dimen>
+    <dimen name="icon_size">36dp</dimen>
+    <dimen name="three_dots">20dp</dimen>
+    <dimen name="padding_side_fragment">16dp</dimen>
+    <dimen name="padding_side_large">15dp</dimen>
+    <dimen name="padding_side">10dp</dimen>
+    <dimen name="padding_bottom">5dp</dimen>
+    <dimen name="inset">0dp</dimen>
 
 </resources>
