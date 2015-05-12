@@ -13,6 +13,7 @@
   </ol>
 </li>
 <li>Devices tested: <ol>
+  <li>Sony Xperia LT26i</li>
   <li>Samsung Galaxy S4</li>
   <li>Samsung Galaxy S3</li>
   <li>Nexus 10</li>
