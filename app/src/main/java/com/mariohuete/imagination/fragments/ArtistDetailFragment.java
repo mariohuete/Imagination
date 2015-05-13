@@ -27,6 +27,7 @@ import com.mariohuete.imagination.models.Album;
 import com.mariohuete.imagination.models.Artist;
 import com.mariohuete.imagination.utils.Common;
 import com.mariohuete.imagination.utils.ImageLoader;
+import com.mariohuete.imagination.utils.Network;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -145,8 +146,13 @@ public class ArtistDetailFragment extends Fragment implements View.OnClickListen
                 SharedPreferences.Editor editor = preferences.edit();
                 switch (item.getItemId()) {
                     case R.id.action_settings:
-                        NavUtils.navigateUpTo(getActivity(), new Intent(getActivity(),
-                                ArtistListActivity.class));
+                        if(Network.isConnected(getActivity().getApplicationContext())) {
+                            NavUtils.navigateUpTo(getActivity(), new Intent(getActivity(),
+                                    ArtistListActivity.class));
+                        }
+                        else if (!Network.isAlertShowing()) {
+                            Network.showAlert(getActivity().getApplicationContext(), getActivity());
+                        }
                         return true;
                     case R.id.action_with_third:
                         Common.thirdPartyLibs = true;
