@@ -1,20 +1,27 @@
 <resources>
     <string name="app_name">Imagination</string>
+    <string name="splash">Imagination List</string>
     <string name="title_artist_detail">Artist Detail</string>
     <string name="action_settings">Refresh</string>
     <string name="action_with_third">With third party libraries</string>
     <string name="action_no_third">Without third party libraries</string>
     <string name="end_point">http://i.img.co/data</string>
     <string name="loading">Loading content (RetroFit)&#8230;</string>
+    <string name="reload">Reload</string>
     <string name="loading_async">Loading content (AsyncTask)&#8230;</string>
     <string name="success">Data retrieved successfully</string>
     <string name="error">An error occurred</string>
     <string name="connection">WiFi/3G/4G connection is required, please try again</string>
+    <string name="no_connection">No connection</string>
+    <string name="yes_button">Yes</string>
+    <string name="no_button">No</string>
+    <string name="click">Click yes to open network settings</string>
     <string name="retrofit_error">Unable to resolve host</string>
     <string name="artists">artists</string>
     <string name="albums">albums</string>
     <string name="external">ImageCache</string>
     <string name="show_splash">show</string>
+    <string name="message">message</string>
     <string name="third">third</string>
     <string name="logo_desc">Imagination logo for splash screen</string>
     <string name="album_desc">Album image</string>
