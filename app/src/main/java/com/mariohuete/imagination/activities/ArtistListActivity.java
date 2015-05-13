@@ -1,7 +1,9 @@
 package com.mariohuete.imagination.activities;
 
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
@@ -14,6 +16,7 @@ import com.mariohuete.imagination.fragments.ArtistListFragment;
 import com.mariohuete.imagination.R;
 import com.mariohuete.imagination.models.Artist;
 import com.mariohuete.imagination.utils.Common;
+import com.mariohuete.imagination.utils.Network;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -43,6 +46,7 @@ public class ArtistListActivity extends ActionBarActivity implements ArtistListF
      * device.
      */
     private boolean mTwoPane;
+    private Network network;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,30 +74,64 @@ public class ArtistListActivity extends ActionBarActivity implements ArtistListF
         }
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        // Register receiver for connectivity changes
+        network = new Network(this);
+        registerReceiver(network, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        if(!Network.isConnected(getApplicationContext()) && !Network.isAlertShowing()) {
+            Network.showAlert(getApplicationContext(), this);
+        }
+        else if(Network.isConnected(getApplicationContext()) && Network.isAlertShowing()) {
+            Network.dismissAlert();
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        unregisterReceiver(network);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
     /**
      * Callback method from {@link ArtistListFragment.Callbacks}
      * indicating that the item with the given ID was selected.
      */
     @Override
     public void onItemSelected(Artist id) {
-        if (mTwoPane) {
-            // In two-pane mode, show the detail view in this activity by
-            // adding or replacing the detail fragment using a
-            // fragment transaction.
-            Bundle arguments = new Bundle();
-            arguments.putSerializable(ArtistDetailFragment.ARG_ITEM_ID, id);
-            ArtistDetailFragment fragment = new ArtistDetailFragment();
-            fragment.setArguments(arguments);
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.artist_detail_container, fragment)
-                    .commit();
+        if(Network.isConnected(getApplicationContext())) {
+            if (mTwoPane) {
+                // In two-pane mode, show the detail view in this activity by
+                // adding or replacing the detail fragment using a
+                // fragment transaction.
+                Bundle arguments = new Bundle();
+                arguments.putSerializable(ArtistDetailFragment.ARG_ITEM_ID, id);
+                ArtistDetailFragment fragment = new ArtistDetailFragment();
+                fragment.setArguments(arguments);
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.artist_detail_container, fragment)
+                        .commit();
+            } else {
+                // In single-pane mode, simply start the detail activity
+                // for the selected item ID.
+                Intent detailIntent = new Intent(this, ArtistDetailActivity.class);
+                detailIntent.putExtra(ArtistDetailFragment.ARG_ITEM_ID, id);
+                startActivity(detailIntent);
+            }
         }
-        else {
-            // In single-pane mode, simply start the detail activity
-            // for the selected item ID.
-            Intent detailIntent = new Intent(this, ArtistDetailActivity.class);
-            detailIntent.putExtra(ArtistDetailFragment.ARG_ITEM_ID, id);
-            startActivity(detailIntent);
+        else if (!Network.isAlertShowing()) {
+            Network.showAlert(getApplicationContext(), this);
         }
     }
 
@@ -115,9 +153,14 @@ public class ArtistListActivity extends ActionBarActivity implements ArtistListF
         // as you specify a parent activity in AndroidManifest.xml.
         switch (item.getItemId()) {
             case R.id.action_settings:
-                Intent intent = getIntent();
-                finish();
-                startActivity(intent);
+                if(Network.isConnected(getApplicationContext())) {
+                    Intent intent = getIntent();
+                    finish();
+                    startActivity(intent);
+                }
+                else if (!Network.isAlertShowing()){
+                    Network.showAlert(getApplicationContext(), this);
+                }
                 return true;
             case R.id.action_with_third:
                 Common.thirdPartyLibs = true;
@@ -138,11 +181,6 @@ public class ArtistListActivity extends ActionBarActivity implements ArtistListF
     public void onBackPressed() {
         // Close completely the app if the background is interrupt by clicking back button
         System.exit(0);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
     }
 
 }

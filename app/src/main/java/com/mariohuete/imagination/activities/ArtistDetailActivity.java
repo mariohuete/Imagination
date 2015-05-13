@@ -1,7 +1,9 @@
 package com.mariohuete.imagination.activities;
 
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
@@ -15,6 +17,7 @@ import com.mariohuete.imagination.fragments.ArtistDetailFragment;
 import com.mariohuete.imagination.R;
 import com.mariohuete.imagination.models.Artist;
 import com.mariohuete.imagination.utils.Common;
+import com.mariohuete.imagination.utils.Network;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -31,6 +34,7 @@ import butterknife.Optional;
  * more than a {@link ArtistDetailFragment}.
  */
 public class ArtistDetailActivity extends ActionBarActivity {
+    private Network network;
     @Optional @InjectView(R.id.toolbar) Toolbar toolbar;
     @InjectView(R.id.title) TextView title;
 
@@ -70,6 +74,36 @@ public class ArtistDetailActivity extends ActionBarActivity {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        // Register receiver for connectivity changes
+        network = new Network(this);
+        registerReceiver(network, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        if(!Network.isConnected(getApplicationContext()) && !Network.isAlertShowing()) {
+            Network.showAlert(getApplicationContext(), this);
+        }
+        else if(Network.isConnected(getApplicationContext()) && Network.isAlertShowing()) {
+            Network.dismissAlert();
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        unregisterReceiver(network);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Retrieve preferences
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -84,10 +118,20 @@ public class ArtistDetailActivity extends ActionBarActivity {
                 //
                 // http://developer.android.com/design/patterns/navigation.html#up-vs-back
                 //
-                NavUtils.navigateUpTo(this, new Intent(this, ArtistListActivity.class));
+                if(Network.isConnected(getApplicationContext())) {
+                    NavUtils.navigateUpTo(this, new Intent(this, ArtistListActivity.class));
+                }
+                else if (!Network.isAlertShowing()) {
+                    Network.showAlert(getApplicationContext(), this);
+                }
                 return true;
             case R.id.action_settings:
-                NavUtils.navigateUpTo(this, new Intent(this, ArtistListActivity.class));
+                if(Network.isConnected(getApplicationContext())) {
+                    NavUtils.navigateUpTo(this, new Intent(this, ArtistListActivity.class));
+                }
+                else if (!Network.isAlertShowing()) {
+                    Network.showAlert(getApplicationContext(), this);
+                }
                 return true;
             case R.id.action_with_third:
                 Common.thirdPartyLibs = true;
