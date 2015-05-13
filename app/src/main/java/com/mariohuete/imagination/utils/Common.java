@@ -16,4 +16,5 @@ public class Common {
     public static List<Album> albumList = new ArrayList<>();
     public static boolean thirdPartyLibs = true;
     public static boolean twoPane = false;
+    public static boolean reload = true;
 }
