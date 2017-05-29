@@ -1,4 +1,3 @@
-#![Icon] (https://raw.githubusercontent.com/mariohuete/Imagination/master/app/src/main/res/drawable-mdpi/ic_launcher.png) Imagination
 <body>
 <h2>Description</h2>
 <p>Native Android app for multiple screen sizes and densities
@@ -23,14 +22,16 @@
 <li>Warnings: 0</li>
 <li>Fragmentation: minSDKversion = 9 (Android 2.3 GINGERBREAD), so can run in around 99.5 % of existing Android devices, like the Android documentation show (https://developer.android.com/about/dashboards/index.html)</li> 
 </ol>
-![Fragmentation](https://raw.githubusercontent.com/mariohuete/Imagination/master/screenshots/chart.png)
+
+<img src="https://raw.githubusercontent.com/mariohuete/Imagination/master/screenshots/chart.png" data-canonical-src="https://raw.githubusercontent.com/mariohuete/Imagination/master/screenshots/chart.png" width="400" height="400" />
+
 </br>
 </br>
 <h2>Screenshots</h2>
 <h3>Mobile portrait</h3>
 <tr>
-  <td>![Splash screen](https://raw.githubusercontent.com/mariohuete/Imagination/master/screenshots/splash_m.png)</td>
-  <td>![Artist list (mobile)](https://raw.githubusercontent.com/mariohuete/Imagination/master/screenshots/artist_list_m.png)</td>
+  <td><img src="https://raw.githubusercontent.com/mariohuete/Imagination/master/screenshots/splash_m.png" data-canonical-src="https://raw.githubusercontent.com/mariohuete/Imagination/master/screenshots/splash_m.png" width="200" height="400" /></td>
+  <td><img src="https://raw.githubusercontent.com/mariohuete/Imagination/master/screenshots/artist_list_m.png" data-canonical-src="https://raw.githubusercontent.com/mariohuete/Imagination/master/screenshots/artist_list_m.png" width="200" height="400" /></td>
   <td>![Menu (mobile)](https://raw.githubusercontent.com/mariohuete/Imagination/master/screenshots/menu_m.png)</td>
 </tr>
 <tr>
